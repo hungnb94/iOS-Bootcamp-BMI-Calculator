@@ -17,7 +17,7 @@ class ResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("bmi = \(bmiValue)")
+        bmiLabel.text = bmiValue
     }
 
 }
