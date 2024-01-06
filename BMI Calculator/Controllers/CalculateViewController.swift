@@ -9,6 +9,8 @@
 import UIKit
 
 class CalculateViewController: UIViewController {
+    var calculatorBrain = CalculatorBrain()
+    
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var heightSlider: UISlider!
@@ -28,6 +30,9 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+        let height = heightSlider.value
+        let weight = weightSlider.value
+        calculatorBrain.calculateBmi(height: height, weight: weight)
         self.performSegue(withIdentifier: "goToResult", sender: self)
     }
     
@@ -35,11 +40,7 @@ class CalculateViewController: UIViewController {
         if segue.identifier == "goToResult" {
             let viewController = segue.destination as! ResultViewController
             
-            let height = heightSlider.value
-            let weight = weightSlider.value
-            let bmi = weight / (height * height)
-            
-            viewController.bmiValue = String(format: "%.1f", bmi)
+            viewController.bmiValue = calculatorBrain.getBmiValue()
         }
     }
 }
